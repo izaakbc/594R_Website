@@ -1,21 +1,19 @@
 # Introduction {#intro}
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+The **lidR** package can be installed from CRAN or Github. the lidR package allows for the plotting and analysis of an .las point cloud file. This file is a collection of 3-D coordinate points. The number of points in an .las photogrammetry file usually has more than a million points. The code shown below allows one to see some information on one of the point clouds used in the project.
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
+```{r}
+library(lidR)
+readLAS("2-18-20-Correct.las")
 ```
 
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
+The above code gives the following output for one of the las files used in the project:
 
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
-
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+class        : LAS (v1.2 format 0)
+memory       : 1.3 Gb 
+extent       : 276743.7, 276961.1, 4170109, 4170479 (xmin, xmax, ymin, ymax)
+coord. ref.  : +proj=utm +zone=12 +datum=WGS84 +units=m +no_defs 
+area         : 49087.57 m²
+points       : 18.71 million points
+density      : 381.11 points/m²
