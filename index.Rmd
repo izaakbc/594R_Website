@@ -14,3 +14,9 @@ description: ""
 
 Part of my research for my thesis is analyzing the precision of a point cloud based on the number of ground control points present in a model. The reference model is the model with the most ground control points (this should be the most accurate model). I then compare a test model with less ground control points (less accurate) with the reference model. The way I have been measuring the error between my reference point cloud and my test point cloud has been through a tool that identifies the euclidean distance to the nearest neighbor. Although this tool is useful, I have wondered how much of that Euclidean distance error can be attributed to the X-, Y-, and Z-direction. This is an important subject in my research as the point clouds will be used in bathymetry mapping. In bathymetry mapping, Shifts in the X- and Y- direction would not be as bad as shifts in the Z-direction, which is why I am currently interested in finding how much of the error is in the X-,Y- and Z-direction respectively.
 
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
