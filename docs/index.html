@@ -24,7 +24,7 @@
 <meta name="author" content="Izaak Cooper" />
 
 
-<meta name="date" content="2020-10-02" />
+<meta name="date" content="2020-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -134,15 +134,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Abstract</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
-<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
-<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a><ul>
-<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
-<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Literature</a></li>
+<li class="chapter" data-level="3" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>3</b> Methodology</a><ul>
+<li class="chapter" data-level="3.1" data-path="methodology.html"><a href="methodology.html#control-dataset"><i class="fa fa-check"></i><b>3.1</b> Control Dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="methodology.html"><a href="methodology.html#test-datasets"><i class="fa fa-check"></i><b>3.2</b> Test Datasets</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="4" data-path="case-study.html"><a href="case-study.html"><i class="fa fa-check"></i><b>4</b> Case Study</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>6</b> Conclusions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -167,11 +170,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Measuring Precision between Point Clouds based on Different Parameters</h1>
 <p class="author"><em>Izaak Cooper</em></p>
-<p class="date"><em>2020-10-02</em></p>
+<p class="date"><em>2020-11-02</em></p>
 </div>
-<div id="abstract" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Abstract</h1>
-<p>Part of my research for my thesis is analyzing the precision of a point cloud based on the number of ground control points present in a model. The reference model is the model with the most ground control points (this should be the most accurate model). I then compare a test model with less ground control points (less accurate) with the reference model. The way I have been measuring the error between my reference point cloud and my test point cloud has been through a tool that identifies the euclidean distance to the nearest neighbor. Although this tool is useful, I have wondered how much of that Euclidean distance error can be attributed to the X-, Y-, and Z-direction. This is an important subject in my research as the point clouds will be used in bathymetry mapping. In bathymetry mapping, Shifts in the X- and Y- direction would not be as bad as shifts in the Z-direction, which is why I am currently interested in finding how much of the error is in the X-,Y- and Z-direction respectively.</p>
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<p>The process of creating three dimensional (3D) models from a collection of two dimensional (2D) images is called photogrammetry. Photogrammetry has been used to model small historical artifacts, structures, and topography. Drones have become an important tool in photogrammetry and topographic modeling in recent years as the combination of these tools provides a relatively cheap alternative to LiDAR when characterizing specific sites. Topographic modeling is useful in multiple fields, and is becoming more widely used in water resources. One specific type of topographic modeling is bathymetry mapping. Bathymetry mapping is topographic modeling of the floor of oceans, seas, lakes, and reservoirs. Bathymetry mapping at reservoirs is usually accomplished through the use of sonar technology, but if the site is not inundated photogrammetry can be used to model the floor of a reservoir. Sonar cannot record the shallower depths of a reservoir and most reservoirs are not at full pool year-round. Since reservoirs are not always at full pool and shallower depths cannot be modeled via sonar some data is missing and a full pool bathymetric map cannot be created. A photogrammetry survey using drones could “finish” the sonar data by modeling the shoreline. This book will test the efficacy of shoreline modeling and the issues associated with modeling shorelines using photogrammetry and drones.</p>
 
 </div>
             </section>

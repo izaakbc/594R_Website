@@ -1,0 +1,22 @@
+# Methodology
+
+The **lidR** package can be installed from CRAN or Github. The lidR package allows for the plotting and analysis of an .las point cloud file. This file is a collection of 3-D coordinate points. The number of points in an .las photogrammetry file usually has more than a million points. The code shown below summarizes the control point cloud that will be used as a reference as it provides the best physical representation of Newcastle Dam that we could produce. We then tested different factors and observed the visual and statistical differences between the point cloud models to determine which factors are important in creating an accurate shoreline model. The test datasets and their information are shown below the control dataset (I am currently working to simplify all the datasets as my computer crashes when I try to process more than just the control cloud when I build the book).
+
+## Control Dataset
+
+```{r ,message=FALSE,warning=FALSE}
+library(lidR)
+las <- readLAS("2-18-20-Correct.las")
+```
+
+```{r ,message=FALSE,warning=FALSE}
+Zdata <- las@data[["Z"]]
+Xdata <- las@data[["X"]]
+Ydata <- las@data[["Y"]]
+
+boxplot(Zdata)
+boxplot(Xdata)
+boxplot(Ydata)
+```
+
+## Test Datasets
