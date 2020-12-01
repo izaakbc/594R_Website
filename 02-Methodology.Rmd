@@ -1,22 +1,44 @@
 # Methodology
 
-The **lidR** package can be installed from CRAN or Github. The lidR package allows for the plotting and analysis of an .las point cloud file. This file is a collection of 3-D coordinate points. The number of points in an .las photogrammetry file usually has more than a million points. The code shown below summarizes the control point cloud that will be used as a reference as it provides the best physical representation of Newcastle Dam that we could produce. We then tested different factors and observed the visual and statistical differences between the point cloud models to determine which factors are important in creating an accurate shoreline model. The test datasets and their information are shown below the control dataset (I am currently working to simplify all the datasets as my computer crashes when I try to process more than just the control cloud when I build the book).
+The **lidR** package can be installed from CRAN or Github. The lidR package allows for the plotting and analysis of an .las point cloud file. This .las file is a collection of 3-D coordinate points. The number of points in an .las photogrammetry file usually has more than a million points.The point cloud files used in this book have been filtered to five foot intervals as they will be used in bathymetry maps that don't necessitate the finer details found in the original point clouds. The code shown below summarizes the control point cloud that will be used as a reference as it provides the best physical representation of Newcastle Dam that we could produce. We then tested different factors and observed the visual and statistical differences between the point cloud models to determine which factors are important in creating an accurate shoreline model. The test datasets and their information are shown below the control dataset.
 
 ## Control Dataset
 
+The control dataset used a single ground control point in the center of the dam. The ground control point ties the topographic model to actual GPS coordinates in three-dimensional space. All available tools were used in the creation of the control point cloud. Three test point clouds were then created with the omission or alteration to one of the tools used in the photogrammetry process. We then compare the different point clouds to identify if the tools are truly necessary in creating an accurate topographic model of the shoreline.
+
+
 ```{r ,message=FALSE,warning=FALSE}
 library(lidR)
-las <- readLAS("2-18-20-Correct.las")
+Control <- readLAS("data/11-30-20-Correct.las")
+Mistagged <- readLAS("data/11-30-20-Mistag.las")
+NoGCP <- readLAS("data/11-30-20-NoGCP.las")
+NoMask <- readLAS("data/11-30-20-NoMagicWand.las")
 ```
 
-```{r ,message=FALSE,warning=FALSE}
-Zdata <- las@data[["Z"]]
-Xdata <- las@data[["X"]]
-Ydata <- las@data[["Y"]]
+```{r, setup}
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
 
-boxplot(Zdata)
-boxplot(Xdata)
-boxplot(Ydata)
+```{r ,message=FALSE,warning=FALSE, webgl=TRUE}
+plot(Control)
 ```
 
 ## Test Datasets
+
+Three different datasets were created to test if certain tools should be used to create the final point cloud topography models.If these tools didn't change the datasets in a statistically significant manner then these tools could be omitted, saving time and money in the surveying process.
+
+The first test dataset portrays the differences that would occur in the topographic point cloud if a ground control point is incorrectly tagged in one of the 8 photos by 2 meters. Mistagging of ground control points is a common error in the photogrammetry process and the changes in the final point cloud are not immediately obvious. If we could characterize the difference in the point cloud due to the mistagging of a ground control point it would allow for an easier time troubleshooting model production. A plot of the mistagged ground control points is shown below. Although obvious differences cannot be seen in the plot shown below, a deeper analysis is done in the Results section.
+```{r ,message=FALSE,warning=FALSE, webgl=TRUE}
+plot(Mistagged)
+```
+
+The second dataset was produced without tagging any ground control points. This means that the GPS from the drone is the only thing tying the model to reality. The most time consuming part of a photogrammetry survey of a shoreline is the placement of ground control points. Photogrammetry surveys would be much less costly if an accurate topographic model can be produced without the use of ground control points. Although obvious differences cannot be seen in the plot shown below, a deeper analysis is done in the Results section.
+```{r ,message=FALSE,warning=FALSE, webgl=TRUE}
+plot(NoGCP)
+```
+
+The third dataset was prodcued without masking the water in each of the photos that were captured. Photogrammetry "matches" common features in photographs that were taken with overlapping topography. Water has features that change due to light refraction and reflection which obscures the alignment of the camera positions that are determined in the photogrammetry software. If the model changes too much due to these erroneous tie points then surveyors must mask out water in photos to create an accurate topographic model. Although obvious differences cannot be seen in the plot shown below, a deeper analysis is done in the Results section.
+```{r ,message=FALSE,warning=FALSE, webgl=TRUE}
+plot(NoMask)
+```
