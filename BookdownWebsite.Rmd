@@ -9,80 +9,204 @@ biblio-style: apalike
 link-citations: yes
 description: ""
 ---
---- 
-title: "Measuring Precision between Point Clouds based on Different Parameters"
-author: "Izaak Cooper"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-link-citations: yes
-description: ""
----
 
-# Abstract
+# Introduction
 
-Part of my research for my thesis is analyzing the precision of a point cloud based on the number of ground control points present in a model. The reference model is the model with the most ground control points (this should be the most accurate model). I then compare a test model with less ground control points (less accurate) with the reference model. The way I have been measuring the error between my reference point cloud and my test point cloud has been through a tool that identifies the euclidean distance to the nearest neighbor. Although this tool is useful, I have wondered how much of that Euclidean distance error can be attributed to the X-, Y-, and Z-direction. This is an important subject in my research as the point clouds will be used in bathymetry mapping. In bathymetry mapping, Shifts in the X- and Y- direction would not be as bad as shifts in the Z-direction, which is why I am currently interested in finding how much of the error is in the X-,Y- and Z-direction respectively.
+The process of creating three dimensional (3D) models from a collection of two dimensional (2D) images is called photogrammetry. Photogrammetry has been used to model small historical artifacts, structures, and topography. Drones have become an important tool in photogrammetry and topographic modeling in recent years as the combination of these tools provides a relatively cheap alternative to LiDAR when characterizing specific sites. Topographic modeling is useful in multiple fields, and is becoming more widely used in water resources. One specific type of topographic modeling is bathymetry mapping. Bathymetry mapping is topographic modeling of the floor of oceans, seas, lakes, and reservoirs. Bathymetry mapping at reservoirs is usually accomplished through the use of sonar technology, but if the site is not inundated photogrammetry can be used to model the floor of a reservoir. Sonar cannot record the shallower depths of a reservoir and most reservoirs are not at full pool year-round. Since reservoirs are not always at full pool and shallower depths cannot be modeled via sonar some data is missing and a full pool bathymetric map cannot be created. A photogrammetry survey using drones could "finish" the sonar data by modeling the shoreline. This book will test the efficacy of shoreline modeling and the issues associated with modeling shorelines using photogrammetry and drones.
 
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
 
 <!--chapter:end:index.Rmd-->
 
-# Introduction {#intro}
+# Literature {#intro}
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+Photogrammetry is an accurate and useful method for generating topographic models. In recent years, Structure from Motion (SfM) algorithms have used imagery from small Unmanned Aerial Vehicles (sUAVs) to generate accurate topographical models. This is a more cost-effective method for generating topography for small areas compared to traditional aerial photogrammetric methods. Extending these general terrain models, recent studies have demonstrated the use of sUAVs and SfM technology in the field of water resources [1-8]. The majority of this work revolves around using UAVs data collection methods to create accurate three-dimensional (3D) topographic models. For example, researchers have monitored braided river channels using photogrammetry [5] and sUAV images have been used to capture detailed orthoimages of river streambeds and process these images to accurately estimate the particle size distribution of streambed sediments [6]. Light Detection and Ranging (LiDAR) has been used in conjunction with sUAV technology to create topo-bathymetric models [9]. LiDAR is a tool that could be used in place of SfM photogrammetry to model shorelines, although LiDAR surveys tend to be more costly as they generally require larger UAVs and more costly sensors. SfM-based photogrammetry has been used to supplement standard sonar collections by collecting data in shallow depths that sonar technology cannot accurately model [1]; our method extends this research to above-water areas. Others have used sUAV-based methods to monitor changes in coastline due to wave runup [2] and evaluate water resource infrastructure such as spillways [10]. 
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+Most sUAV based surveys use a pre-determined grid format for flight patterns over areas where the width and length are of similar magnitude, thus most of the current literature on ground control point spacing discuss and address a grid format for flight patterns and ground control (GCP) placement [11,12]. Ground control points are targets set out with known GPS locations before the flight of the UAV that then tie a photogrammetry model (point cloud model) to reality. Although gridded flights are most common for collecting over typical sites, some jobs require long, thin flight paths such as the bathymetric surveys discussed in my project, roads, road cut slopes, levees, or canals [13]. The issue of GCP spacing and orientation along long corridors has been research with details of the expected accuracy with different GCP spacing and orientation along a relatively long stretch of road reported [14]. My project deals with a similar flight pattern to that presented here, but roads generally follow a regular line, without significant changes, while some reservoir shorelines are erratic and have a more fractal geometry. Long, erratic, shorelines also pose an issue during fieldwork as placing many GCPs may be unrealistic, time consuming, or costly as parts of the shoreline could be inaccessible. The minimal need of GCPs has been researched. The current literature on the precision of point cloud models based on GCP spacing suggests that horizontal (X-, Y-) accuracy is more easily achieved than vertical (Z-) accuracy [15]. Vertical (Z-) accuracy is of the utmost important when creating bathymetric maps as storage capacity curves rely on volumetric calculations of the calculated point cloud, thus my project will look into the precision in the X-, Y-and Z-direction of point clouds produced with varying amounts of GCPs along a shoreline, with a special emphasis on the Z-direction precision. Other factors will be tested to find how those factors effect the shoreline model, including masking water from the images and the effects of mistagged ground control points.
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
+1. Alvarez, L.V.; Moreno, H.A.; Segales, A.R.; Pham, T.G.; Pillar-Little, E.A.; Chilson, P.B. Merging unmanned aerial systems (UAS) imagery and echo soundings with an adaptive sampling technique for bathymetric surveys. Remote Sensing 2018, 10, 1362. 
+
+2. Casella, E.; Rovere, A.; Pedroncini, A.; Mucerino, L.; Casella, M.; Cusati, L.A.; Vacchi, M.; Ferrari, M.; Firpo, M. Study of wave runup using numerical models and low-altitude aerial photogrammetry: A tool for coastal management. Estuarine, Coastal and Shelf Science 2014, 149, 160-167. 
+
+3. Erena, M.; Atenza, J.F.; García-Galiano, S.; Domínguez, J.A.; Bernabé, J.M. Use of drones for the topo-bathymetric monitoring of the reservoirs of the Segura river basin. Water 2019, 11, 445. 
+
+4. Huizinga, R.J.; Heimann, D.C. Hydrographic Surveys of Rivers and Lakes Using a Multibeam Echosounder Mapping System; US Department of the Interior, US Geological Survey: 2018. 
+
+5. Javernick, L.; Brasington, J.; Caruso, B. Modeling the topography of shallow braided rivers using Structure-from-Motion photogrammetry. Geomorphology 2014, 213, 166-182. 
+
+6. Langhammer, J.; Lendzioch, T.; Miřijovský, J.; Hartvich, F. UAV-based optical granulometry as tool for detecting changes in structure of flood depositions. Remote Sensing 2017, 9, 240. 
+
+7. Templin, T.; Popielarczyk, D.; Kosecki, R. Application of low-cost fixed-wing UAV for inland lakes shoreline investigation. Pure and Applied Geophysics 2018, 175, 3263-3283. 
+
+8. Zanutta, A.; Lambertini, A.; Vittuari, L. UAV photogrammetry and ground surveys as a mapping tool for quickly monitoring shoreline and beach changes. Journal of Marine Science and Engineering 2020, 8, 52. 
+
+9. Mandlburger, G.; Pfennigbauer, M.; Schwarz, R.; Flöry, S.; Nussbaumer, L. Concept and Performance Evaluation of a Novel UAV-Borne Topo-Bathymetric LiDAR Sensor. Remote Sensing 2020, 12, 986. 
+
+10. Arce, S.; Vernon, C.A.; Hammond, J.; Newell, V.; Janson, J.; Franke, K.W.; Hedengren, J.D. Automated 3D Reconstruction Using Optimized View-Planning Algorithms for Iterative Development of Structure-from-Motion Models. Remote Sensing 2020, 12, 2169. 
+
+11. Martínez-Carricondo, P.; Agüera-Vega, F.; Carvajal-Ramírez, F.; Mesas-Carrascosa, F.-J.; García-Ferrer, A.; Pérez-Porras, F.-J. Assessment of UAV-photogrammetric mapping accuracy based on variation of ground control points. International journal of applied earth observation and geoinformation 2018, 72, 1-10. 
+
+12. Remondino, F.; Barazzetti, L.; Nex, F.; Scaioni, M.; Sarazzi, D. UAV photogrammetry for mapping and 3d modeling–current status and future perspectives. International archives of the photogrammetry, remote sensing and spatial information sciences 2011, 38, C22. 
+
+13. Carvajal-Ramírez, F.; Agüera-Vega, F.; Martínez-Carricondo, P.J. Effects of image orientation and ground control points distribution on unmanned aerial vehicle photogrammetry projects on a road cut slope. Journal of Applied Remote Sensing 2016, 10, 034004. 
+
+14. Ferrer-González, E.; Agüera-Vega, F.; Carvajal-Ramírez, F.; Martínez-Carricondo, P. UAV Photogrammetry Accuracy Assessment for Corridor Mapping Based on the Number and Distribution of Ground Control Points. Remote Sensing 2020, 12, 2447. 
+
+15. Skarlatos, D.; Procopiou, E.; Stavrou, G.; Gregoriou, M. Accuracy assessment of minimum control points for UAV photography and georeferencing. In Proceedings of First international conference on remote sensing and geoinformation of the environment (RSCy2013); p. 879514. 
+
+<!--chapter:end:01-Literature.Rmd-->
+
+# Methodology
+
+The **lidR** package can be installed from CRAN or Github. The lidR package allows for the plotting and analysis of an .las point cloud file. This .las file is a collection of 3-D coordinate points. The number of points in an .las photogrammetry file usually has more than a million points.The point cloud files used in this book have been filtered to five foot intervals as they will be used in bathymetry maps that don't necessitate the finer details found in the original point clouds. The code shown below summarizes the control point cloud that will be used as a reference as it provides the best physical representation of Newcastle Dam that we could produce. We then tested different factors and observed the visual and statistical differences between the point cloud models to determine which factors are important in creating an accurate shoreline model. The test datasets and their information are shown below the control dataset.
+
+## Control Dataset
+
+The control dataset used a single ground control point in the center of the dam. The ground control point ties the topographic model to actual GPS coordinates in three-dimensional space. All available tools were used in the creation of the control point cloud. Three test point clouds were then created with the omission or alteration to one of the tools used in the photogrammetry process. We then compare the different point clouds to identify if the tools are truly necessary in creating an accurate topographic model of the shoreline.
+
+
+```{r ,message=FALSE,warning=FALSE}
+library(lidR)
+Control <- readLAS("data/11-30-20-Correct.las")
+Mistagged <- readLAS("data/11-30-20-Mistag.las")
+NoGCP <- readLAS("data/11-30-20-NoGCP.las")
+NoMask <- readLAS("data/11-30-20-NoMagicWand.las")
 ```
 
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
-
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
+```{r, setup}
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
 ```
 
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+```{r ,message=FALSE,warning=FALSE, webgl=TRUE}
+plot(Control)
+```
 
-<!--chapter:end:01-intro.Rmd-->
+## Test Datasets
 
-# Literature
+Three different datasets were created to test if certain tools should be used to create the final point cloud topography models.If these tools didn't change the datasets in a statistically significant manner then these tools could be omitted, saving time and money in the surveying process.
 
-Here is a review of existing methods.
+The first test dataset portrays the differences that would occur in the topographic point cloud if a ground control point is incorrectly tagged in one of the 8 photos by 2 meters. Mistagging of ground control points is a common error in the photogrammetry process and the changes in the final point cloud are not immediately obvious. If we could characterize the difference in the point cloud due to the mistagging of a ground control point it would allow for an easier time troubleshooting model production. A plot of the mistagged ground control points is shown below. Although obvious differences cannot be seen in the plot shown below, a deeper analysis is done in the Results section.
+```{r ,message=FALSE,warning=FALSE, webgl=TRUE}
+plot(Mistagged)
+```
 
-<!--chapter:end:02-literature.Rmd-->
+The second dataset was produced without tagging any ground control points. This means that the GPS from the drone is the only thing tying the model to reality. The most time consuming part of a photogrammetry survey of a shoreline is the placement of ground control points. Photogrammetry surveys would be much less costly if an accurate topographic model can be produced without the use of ground control points. Although obvious differences cannot be seen in the plot shown below, a deeper analysis is done in the Results section.
+```{r ,message=FALSE,warning=FALSE, webgl=TRUE}
+plot(NoGCP)
+```
 
-# Methods
+The third dataset was prodcued without masking the water in each of the photos that were captured. Photogrammetry "matches" common features in photographs that were taken with overlapping topography. Water has features that change due to light refraction and reflection which obscures the alignment of the camera positions that are determined in the photogrammetry software. If the model changes too much due to these erroneous tie points then surveyors must mask out water in photos to create an accurate topographic model. Although obvious differences cannot be seen in the plot shown below, a deeper analysis is done in the Results section.
+```{r ,message=FALSE,warning=FALSE, webgl=TRUE}
+plot(NoMask)
+```
 
-We describe our methods in this chapter.
+<!--chapter:end:02-Methodology.Rmd-->
 
-<!--chapter:end:03-method.Rmd-->
+# Results
 
-# Applications
+As seen in the methodology section, all four las point clouds are relatively accurate in that it accurately models the shoreline, and the details of the shoreline are accurately portrayed in relation to the other points. Violin plots are a type of plot that can show systematic changes in the collection of points in the point clouds. A violin plot is a type of box and whisker plot that displays the density of point along a given parameter (amount of points in the X-, Y- and Z- direction are used below). The code below defines the data and then creates violin plots comparing the test datasets with the control dataset. When the violin plot of a test dataset mirrors that of the control dataset the test dataset is not significantly different in that parameter. The three violin plots below represent the distribution of X-, Y- and Z- values in the different las datasets.As seen below, each of the violin plots is relatively accurate compared to the control dataset with very similar violin shapes. The No Ground Control elevation data is inaccurate and is uniformly moved downwards compared to the control dataset.This violin is more evenly spread than the other datasets. The X- and Y- violin plots of NoGCP are also longer than the other plots.
 
-Some _significant_ applications are demonstrated in this chapter.
+```{r ,message=FALSE,warning=FALSE}
+#Reading LAS Files
+library(lidR)
+Control <- readLAS("data/11-30-20-Correct.las")
+Mistagged <- readLAS("data/11-30-20-Mistag.las")
+NoGCP <- readLAS("data/11-30-20-NoGCP.las")
+NoMask <- readLAS("data/11-30-20-NoMagicWand.las")
+```
 
-## Example one
+```{r ,message=FALSE,warning=FALSE}
+# Defining Variables
 
-## Example two
+ZControl <- Control@data[["Z"]]
+XControl <- Control@data[["X"]]
+YControl <- Control@data[["Y"]]
 
-<!--chapter:end:04-application.Rmd-->
+ZMistagged <- Mistagged@data[["Z"]]
+XMistagged <- Mistagged@data[["X"]]
+YMistagged <- Mistagged@data[["Y"]]
 
-# Final Words
+ZNoGCP <- NoGCP@data[["Z"]]
+XNoGCP <- NoGCP@data[["X"]]
+YNoGCP <- NoGCP@data[["Y"]]
 
-We have finished a nice book.
+ZNoMask <- NoMask@data[["Z"]]
+XNoMask <- NoMask@data[["X"]]
+YNoMask <- NoMask@data[["Y"]]
+```
 
-<!--chapter:end:05-summary.Rmd-->
+```{r ,message=FALSE,warning=FALSE}
+# Elevation Violin Plot
+library(vioplot)
+vioplot(ZControl, ZMistagged, ZNoGCP, ZNoMask, names=c("Control", "Mistagged", "NoGCP", "NoMask"),
+   col="gold")
+title("Violin Plots Elevation")
+```
+
+```{r ,message=FALSE,warning=FALSE}
+# X Violin Plot
+library(vioplot)
+vioplot(XControl, XMistagged, XNoGCP, XNoMask, names=c("Control", "Mistagged", "NoGCP", "NoMask"),
+   col="gold")
+title("Violin Plots X")
+```
+
+```{r ,message=FALSE,warning=FALSE}
+# X Violin Plot
+library(vioplot)
+vioplot(YControl, YMistagged, YNoGCP, YNoMask, names=c("Control", "Mistagged", "NoGCP", "NoMask"),
+   col="gold")
+title("Violin Plots Y")
+```
+
+<!--chapter:end:03-Results.Rmd-->
+
+# Discussion
+
+The use of violin plots provides a quick and clean way to see gross differences between las point clouds. This method is good enough for the purpose of finding differences in point clouds that will be used in creating bathymetry maps as bathymetry maps need to be accurate in the Z-direction and need only be accurate to about a foot since water volumes are calculated in the relatively large acre-feet measurement.The Results section shows that there are no significant differences from the control model when there is a mistagged GCP or the water isn't masked from the images. This suggests that these two steps in the photogrammetry process could be skipped in order to create a less costly and more efficient workflow. Ground control points must be present because there were large errors in the Z-direction when ground control points were not used.
+
+Although the violin plots are a good way to examine this set of data, violin plots may not be useful in the comparing other sets of las data as the projects other las project are used for may require models accurate to a few centimeters.
+
+<!--chapter:end:04-Discussion.Rmd-->
 
 `r if (knitr::is_html_output()) '
 # References {-}
 '`
+1. Alvarez, L.V.; Moreno, H.A.; Segales, A.R.; Pham, T.G.; Pillar-Little, E.A.; Chilson, P.B. Merging unmanned aerial systems (UAS) imagery and echo soundings with an adaptive sampling technique for bathymetric surveys. Remote Sensing 2018, 10, 1362. 
 
-<!--chapter:end:06-references.Rmd-->
+2. Casella, E.; Rovere, A.; Pedroncini, A.; Mucerino, L.; Casella, M.; Cusati, L.A.; Vacchi, M.; Ferrari, M.; Firpo, M. Study of wave runup using numerical models and low-altitude aerial photogrammetry: A tool for coastal management. Estuarine, Coastal and Shelf Science 2014, 149, 160-167. 
+
+3. Erena, M.; Atenza, J.F.; García-Galiano, S.; Domínguez, J.A.; Bernabé, J.M. Use of drones for the topo-bathymetric monitoring of the reservoirs of the Segura river basin. Water 2019, 11, 445. 
+
+4. Huizinga, R.J.; Heimann, D.C. Hydrographic Surveys of Rivers and Lakes Using a Multibeam Echosounder Mapping System; US Department of the Interior, US Geological Survey: 2018. 
+
+5. Javernick, L.; Brasington, J.; Caruso, B. Modeling the topography of shallow braided rivers using Structure-from-Motion photogrammetry. Geomorphology 2014, 213, 166-182. 
+
+6. Langhammer, J.; Lendzioch, T.; Miřijovský, J.; Hartvich, F. UAV-based optical granulometry as tool for detecting changes in structure of flood depositions. Remote Sensing 2017, 9, 240. 
+
+7. Templin, T.; Popielarczyk, D.; Kosecki, R. Application of low-cost fixed-wing UAV for inland lakes shoreline investigation. Pure and Applied Geophysics 2018, 175, 3263-3283. 
+
+8. Zanutta, A.; Lambertini, A.; Vittuari, L. UAV photogrammetry and ground surveys as a mapping tool for quickly monitoring shoreline and beach changes. Journal of Marine Science and Engineering 2020, 8, 52. 
+
+9. Mandlburger, G.; Pfennigbauer, M.; Schwarz, R.; Flöry, S.; Nussbaumer, L. Concept and Performance Evaluation of a Novel UAV-Borne Topo-Bathymetric LiDAR Sensor. Remote Sensing 2020, 12, 986. 
+
+10. Arce, S.; Vernon, C.A.; Hammond, J.; Newell, V.; Janson, J.; Franke, K.W.; Hedengren, J.D. Automated 3D Reconstruction Using Optimized View-Planning Algorithms for Iterative Development of Structure-from-Motion Models. Remote Sensing 2020, 12, 2169. 
+
+11. Martínez-Carricondo, P.; Agüera-Vega, F.; Carvajal-Ramírez, F.; Mesas-Carrascosa, F.-J.; García-Ferrer, A.; Pérez-Porras, F.-J. Assessment of UAV-photogrammetric mapping accuracy based on variation of ground control points. International journal of applied earth observation and geoinformation 2018, 72, 1-10. 
+
+12. Remondino, F.; Barazzetti, L.; Nex, F.; Scaioni, M.; Sarazzi, D. UAV photogrammetry for mapping and 3d modeling–current status and future perspectives. International archives of the photogrammetry, remote sensing and spatial information sciences 2011, 38, C22. 
+
+13. Carvajal-Ramírez, F.; Agüera-Vega, F.; Martínez-Carricondo, P.J. Effects of image orientation and ground control points distribution on unmanned aerial vehicle photogrammetry projects on a road cut slope. Journal of Applied Remote Sensing 2016, 10, 034004. 
+
+14. Ferrer-González, E.; Agüera-Vega, F.; Carvajal-Ramírez, F.; Martínez-Carricondo, P. UAV Photogrammetry Accuracy Assessment for Corridor Mapping Based on the Number and Distribution of Ground Control Points. Remote Sensing 2020, 12, 2447. 
+
+15. Skarlatos, D.; Procopiou, E.; Stavrou, G.; Gregoriou, M. Accuracy assessment of minimum control points for UAV photography and georeferencing. In Proceedings of First international conference on remote sensing and geoinformation of the environment (RSCy2013); p. 879514. 
+
+<!--chapter:end:05-References.Rmd-->
 
