@@ -1,1 +1,1 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/home/about/ for how to compile this example.
+This book analyzes the effects of different parameters on the final procuct of a photogrammetry survey of a reservoir shoreline for use in bathymetry mapping.This book is called [Measuring Precision between Point Clouds based on Different Parameters](https://izaakbc.github.io/594R_Website/index.html)
