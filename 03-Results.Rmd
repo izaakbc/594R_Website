@@ -1,0 +1,56 @@
+# Results
+
+As seen in the methodology section, all four las point clouds are relatively accurate in that it accurately models the shoreline, and the details of the shoreline are accurately portrayed in relation to the other points. Violin plots are a type of plot that can show systematic changes in the collection of points in the point clouds. A violin plot is a type of box and whisker plot that displays the density of point along a given parameter (amount of points in the X-, Y- and Z- direction are used below). The code below defines the data and then creates violin plots comparing the test datasets with the control dataset. When the violin plot of a test dataset mirrors that of the control dataset the test dataset is not significantly different in that parameter. The three violin plots below represent the distribution of X-, Y- and Z- values in the different las datasets.As seen below, each of the violin plots is relatively accurate compared to the control dataset with very similar violin shapes. The No Ground Control elevation data is inaccurate and is uniformly moved downwards compared to the control dataset.This violin is more evenly spread than the other datasets. The X- and Y- violin plots of NoGCP are also longer than the other plots.
+
+```{r ,message=FALSE,warning=FALSE}
+#Reading LAS Files
+library(lidR)
+Control <- readLAS("data/11-30-20-Correct.las")
+Mistagged <- readLAS("data/11-30-20-Mistag.las")
+NoGCP <- readLAS("data/11-30-20-NoGCP.las")
+NoMask <- readLAS("data/11-30-20-NoMagicWand.las")
+```
+
+```{r ,message=FALSE,warning=FALSE}
+# Defining Variables
+
+ZControl <- Control@data[["Z"]]
+XControl <- Control@data[["X"]]
+YControl <- Control@data[["Y"]]
+
+ZMistagged <- Mistagged@data[["Z"]]
+XMistagged <- Mistagged@data[["X"]]
+YMistagged <- Mistagged@data[["Y"]]
+
+ZNoGCP <- NoGCP@data[["Z"]]
+XNoGCP <- NoGCP@data[["X"]]
+YNoGCP <- NoGCP@data[["Y"]]
+
+ZNoMask <- NoMask@data[["Z"]]
+XNoMask <- NoMask@data[["X"]]
+YNoMask <- NoMask@data[["Y"]]
+```
+
+```{r ,message=FALSE,warning=FALSE}
+# Elevation Violin Plot
+library(vioplot)
+vioplot(ZControl, ZMistagged, ZNoGCP, ZNoMask, names=c("Control", "Mistagged", "NoGCP", "NoMask"),
+   col="gold")
+title("Violin Plots Elevation")
+```
+
+```{r ,message=FALSE,warning=FALSE}
+# X Violin Plot
+library(vioplot)
+vioplot(XControl, XMistagged, XNoGCP, XNoMask, names=c("Control", "Mistagged", "NoGCP", "NoMask"),
+   col="gold")
+title("Violin Plots X")
+```
+
+```{r ,message=FALSE,warning=FALSE}
+# X Violin Plot
+library(vioplot)
+vioplot(YControl, YMistagged, YNoGCP, YNoMask, names=c("Control", "Mistagged", "NoGCP", "NoMask"),
+   col="gold")
+title("Violin Plots Y")
+```
