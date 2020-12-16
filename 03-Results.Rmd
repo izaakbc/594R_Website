@@ -11,6 +11,8 @@ NoGCP <- readLAS("data/11-30-20-NoGCP.las")
 NoMask <- readLAS("data/11-30-20-NoMagicWand.las")
 ```
 
+
+
 ```{r ,message=FALSE,warning=FALSE}
 # Defining Variables
 
@@ -31,6 +33,8 @@ XNoMask <- NoMask@data[["X"]]
 YNoMask <- NoMask@data[["Y"]]
 ```
 
+The Violin plot below displays the distribution of point along the Z-axis, or elevation. The elevation accuracy is of the utmost importance in bathymetry mapping as bathymetry maps are often used to calculate storage capacity (volume) of a reservoir. The Violin plot below shows that having no GCPs during model creation affects both the shape of the violin plot as well as shifting the entire violin plot in the z-direction. This means that having no GCP in the model is unacceptable as it led to a ~10ft shift in the point cloud model.
+
 ```{r ,message=FALSE,warning=FALSE}
 # Elevation Violin Plot
 library(vioplot)
@@ -39,6 +43,8 @@ vioplot(ZControl, ZMistagged, ZNoGCP, ZNoMask, names=c("Control", "Mistagged", "
 title("Violin Plots Elevation")
 ```
 
+The two violin plots below shows the distribution of points in the point clouds on the X- and Y-axis. There is no considerable difference between the three models which shows that the three factors don't cause major changes in the X- and Y- axis. Although there doesn't seem to be any large systematic difference in the three models, a closer look at the 3D models found in methods shows that the NoMask model has a "shoreline" that extends further into the water than the other models. This extension in shoreline is because the software is trying to model the water as shoreline. In bathymetry mapping, the shoreline point cloud and sonar point cloud should have a smooth transition from one to the other. The water being modeled in the NoMask point cloud keeps the two models from having this smooth transition, therefore the masking tool should be used to mask water out of the images.
+
 ```{r ,message=FALSE,warning=FALSE}
 # X Violin Plot
 library(vioplot)
@@ -46,6 +52,8 @@ vioplot(XControl, XMistagged, XNoGCP, XNoMask, names=c("Control", "Mistagged", "
    col="gold")
 title("Violin Plots X")
 ```
+
+
 
 ```{r ,message=FALSE,warning=FALSE}
 # X Violin Plot
