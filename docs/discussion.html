@@ -24,7 +24,7 @@
 <meta name="author" content="Izaak Cooper" />
 
 
-<meta name="date" content="2020-11-30" />
+<meta name="date" content="2020-12-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -166,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="discussion" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Discussion</h1>
 <p>The use of violin plots provides a quick and clean way to see gross differences between las point clouds. This method is good enough for the purpose of finding differences in point clouds that will be used in creating bathymetry maps as bathymetry maps need to be accurate in the Z-direction and need only be accurate to about a foot since water volumes are calculated in the relatively large acre-feet measurement.The Results section shows that there are no significant differences from the control model when there is a mistagged GCP or the water isn’t masked from the images. This suggests that these two steps in the photogrammetry process could be skipped in order to create a less costly and more efficient workflow. Ground control points must be present because there were large errors in the Z-direction when ground control points were not used.</p>
-<p>Although the violin plots are a good way to examine this set of data, violin plots may not be useful in the comparing other sets of las data as the projects other las project are used for may require models accurate to a few centimeters.</p>
+<p>Although the violin plots are a good way to examine this set of data, violin plots may not be useful in the comparing other sets of las data as the projects other las project are used for may require models accurate to a few centimeters. Because of this, we also inspected the interactive models in the methods section to check and see if the test models showed significant differences. The NoMask set included water in the point cloud which isn’t acceptable. This means that masking water in photos is pertinent before creating the point cloud and that this step should be included.</p>
 
 </div>
             </section>

@@ -24,7 +24,7 @@
 <meta name="author" content="Izaak Cooper" />
 
 
-<meta name="date" content="2020-11-30" />
+<meta name="date" content="2020-12-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -189,12 +189,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-15"><a href="results.html#cb8-15"></a>ZNoMask &lt;-<span class="st"> </span>NoMask<span class="op">@</span>data[[<span class="st">&quot;Z&quot;</span>]]</span>
 <span id="cb8-16"><a href="results.html#cb8-16"></a>XNoMask &lt;-<span class="st"> </span>NoMask<span class="op">@</span>data[[<span class="st">&quot;X&quot;</span>]]</span>
 <span id="cb8-17"><a href="results.html#cb8-17"></a>YNoMask &lt;-<span class="st"> </span>NoMask<span class="op">@</span>data[[<span class="st">&quot;Y&quot;</span>]]</span></code></pre></div>
+<p>The Violin plot below displays the distribution of point along the Z-axis, or elevation. The elevation accuracy is of the utmost importance in bathymetry mapping as bathymetry maps are often used to calculate storage capacity (volume) of a reservoir. The Violin plot below shows that having no GCPs during model creation affects both the shape of the violin plot as well as shifting the entire violin plot in the z-direction. This means that having no GCP in the model is unacceptable as it led to a ~10ft shift in the point cloud model.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="results.html#cb9-1"></a><span class="co"># Elevation Violin Plot</span></span>
 <span id="cb9-2"><a href="results.html#cb9-2"></a><span class="kw">library</span>(vioplot)</span>
 <span id="cb9-3"><a href="results.html#cb9-3"></a><span class="kw">vioplot</span>(ZControl, ZMistagged, ZNoGCP, ZNoMask, <span class="dt">names=</span><span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Mistagged&quot;</span>, <span class="st">&quot;NoGCP&quot;</span>, <span class="st">&quot;NoMask&quot;</span>),</span>
 <span id="cb9-4"><a href="results.html#cb9-4"></a>   <span class="dt">col=</span><span class="st">&quot;gold&quot;</span>)</span>
 <span id="cb9-5"><a href="results.html#cb9-5"></a><span class="kw">title</span>(<span class="st">&quot;Violin Plots Elevation&quot;</span>)</span></code></pre></div>
 <p><img src="BookdownWebsite_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>The two violin plots below shows the distribution of points in the point clouds on the X- and Y-axis. There is no considerable difference between the three models which shows that the three factors don’t cause major changes in the X- and Y- axis. Although there doesn’t seem to be any large systematic difference in the three models, a closer look at the 3D models found in methods shows that the NoMask model has a “shoreline” that extends further into the water than the other models. This extension in shoreline is because the software is trying to model the water as shoreline. In bathymetry mapping, the shoreline point cloud and sonar point cloud should have a smooth transition from one to the other. The water being modeled in the NoMask point cloud keeps the two models from having this smooth transition, therefore the masking tool should be used to mask water out of the images.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="results.html#cb10-1"></a><span class="co"># X Violin Plot</span></span>
 <span id="cb10-2"><a href="results.html#cb10-2"></a><span class="kw">library</span>(vioplot)</span>
 <span id="cb10-3"><a href="results.html#cb10-3"></a><span class="kw">vioplot</span>(XControl, XMistagged, XNoGCP, XNoMask, <span class="dt">names=</span><span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Mistagged&quot;</span>, <span class="st">&quot;NoGCP&quot;</span>, <span class="st">&quot;NoMask&quot;</span>),</span>
