@@ -1,32 +1,3 @@
 `r if (knitr::is_html_output()) '
 # References {-}
 '`
-1. Alvarez, L.V.; Moreno, H.A.; Segales, A.R.; Pham, T.G.; Pillar-Little, E.A.; Chilson, P.B. Merging unmanned aerial systems (UAS) imagery and echo soundings with an adaptive sampling technique for bathymetric surveys. Remote Sensing 2018, 10, 1362. 
-
-2. Casella, E.; Rovere, A.; Pedroncini, A.; Mucerino, L.; Casella, M.; Cusati, L.A.; Vacchi, M.; Ferrari, M.; Firpo, M. Study of wave runup using numerical models and low-altitude aerial photogrammetry: A tool for coastal management. Estuarine, Coastal and Shelf Science 2014, 149, 160-167. 
-
-3. Erena, M.; Atenza, J.F.; García-Galiano, S.; Domínguez, J.A.; Bernabé, J.M. Use of drones for the topo-bathymetric monitoring of the reservoirs of the Segura river basin. Water 2019, 11, 445. 
-
-4. Huizinga, R.J.; Heimann, D.C. Hydrographic Surveys of Rivers and Lakes Using a Multibeam Echosounder Mapping System; US Department of the Interior, US Geological Survey: 2018. 
-
-5. Javernick, L.; Brasington, J.; Caruso, B. Modeling the topography of shallow braided rivers using Structure-from-Motion photogrammetry. Geomorphology 2014, 213, 166-182. 
-
-6. Langhammer, J.; Lendzioch, T.; Miřijovský, J.; Hartvich, F. UAV-based optical granulometry as tool for detecting changes in structure of flood depositions. Remote Sensing 2017, 9, 240. 
-
-7. Templin, T.; Popielarczyk, D.; Kosecki, R. Application of low-cost fixed-wing UAV for inland lakes shoreline investigation. Pure and Applied Geophysics 2018, 175, 3263-3283. 
-
-8. Zanutta, A.; Lambertini, A.; Vittuari, L. UAV photogrammetry and ground surveys as a mapping tool for quickly monitoring shoreline and beach changes. Journal of Marine Science and Engineering 2020, 8, 52. 
-
-9. Mandlburger, G.; Pfennigbauer, M.; Schwarz, R.; Flöry, S.; Nussbaumer, L. Concept and Performance Evaluation of a Novel UAV-Borne Topo-Bathymetric LiDAR Sensor. Remote Sensing 2020, 12, 986. 
-
-10. Arce, S.; Vernon, C.A.; Hammond, J.; Newell, V.; Janson, J.; Franke, K.W.; Hedengren, J.D. Automated 3D Reconstruction Using Optimized View-Planning Algorithms for Iterative Development of Structure-from-Motion Models. Remote Sensing 2020, 12, 2169. 
-
-11. Martínez-Carricondo, P.; Agüera-Vega, F.; Carvajal-Ramírez, F.; Mesas-Carrascosa, F.-J.; García-Ferrer, A.; Pérez-Porras, F.-J. Assessment of UAV-photogrammetric mapping accuracy based on variation of ground control points. International journal of applied earth observation and geoinformation 2018, 72, 1-10. 
-
-12. Remondino, F.; Barazzetti, L.; Nex, F.; Scaioni, M.; Sarazzi, D. UAV photogrammetry for mapping and 3d modeling–current status and future perspectives. International archives of the photogrammetry, remote sensing and spatial information sciences 2011, 38, C22. 
-
-13. Carvajal-Ramírez, F.; Agüera-Vega, F.; Martínez-Carricondo, P.J. Effects of image orientation and ground control points distribution on unmanned aerial vehicle photogrammetry projects on a road cut slope. Journal of Applied Remote Sensing 2016, 10, 034004. 
-
-14. Ferrer-González, E.; Agüera-Vega, F.; Carvajal-Ramírez, F.; Martínez-Carricondo, P. UAV Photogrammetry Accuracy Assessment for Corridor Mapping Based on the Number and Distribution of Ground Control Points. Remote Sensing 2020, 12, 2447. 
-
-15. Skarlatos, D.; Procopiou, E.; Stavrou, G.; Gregoriou, M. Accuracy assessment of minimum control points for UAV photography and georeferencing. In Proceedings of First international conference on remote sensing and geoinformation of the environment (RSCy2013); p. 879514. 
